@@ -1,0 +1,5 @@
+# Bundle patch layer: one Host row loads ./index.js; `dsh.client` in
+# package.json makes the Web app load ./client.js as the browser half.
+- insert:
+    - id: dsh-knowledge-space
+      name: dsh-knowledge-space

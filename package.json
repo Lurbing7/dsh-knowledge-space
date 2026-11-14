@@ -1,0 +1,79 @@
+{
+  "name": "dsh-knowledge-space",
+  "version": "0.1.0",
+  "description": "Turn local Markdown, PDF, Word and Excel folders into searchable knowledge spaces for DeepSeek Harness.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Lurbing7",
+  "homepage": "https://github.com/Lurbing7/dsh-knowledge-space#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lurbing7/dsh-knowledge-space.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lurbing7/dsh-knowledge-space/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "rag",
+    "knowledge-base",
+    "full-text-search",
+    "obsidian"
+  ],
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "host",
+    "locale/*.json",
+    "docs",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=24",
+    "dsh": ">=0.2.2-rc.3 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js test/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "test:client": "node --test test/client.test.mjs"
+  },
+  "dependencies": {
+    "unpdf": "^2.1.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": ">=3.18.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/schemastery": "^3.19.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

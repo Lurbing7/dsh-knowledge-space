@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Knowledge space">
+  <defs>
+    <linearGradient id="ks-g" x1="8" y1="6" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3d7cf4"/>
+      <stop offset="1" stop-color="#1f9d8b"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#ks-g)"/>
+  <path d="M15 21.5A2.5 2.5 0 0 1 17.5 19h9l3.4 4.2H46.5A2.5 2.5 0 0 1 49 25.7V43a2.5 2.5 0 0 1-2.5 2.5h-29A2.5 2.5 0 0 1 15 43V21.5Z" fill="#ffffff" fill-opacity="0.94"/>
+  <path d="M23 31.5h14M23 36.5h9" stroke="#1b2430" stroke-opacity="0.55" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="44" cy="42" r="7.5" fill="#0f1b2d" fill-opacity="0.9"/>
+  <circle cx="43" cy="41" r="3.4" fill="none" stroke="#ffffff" stroke-width="1.8"/>
+  <path d="M45.6 43.8 48.6 47" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

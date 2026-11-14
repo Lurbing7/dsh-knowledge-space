@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Knowledge spaces",
+    "description": "Index local Markdown, PDF, Word and Excel folders into searchable knowledge spaces: a sidebar panel for spaces, imports and reindexing, plus a knowledge_search tool for agents. Everything stays on this machine.",
+    "detail": "docs/DETAIL.md"
+  }
+}

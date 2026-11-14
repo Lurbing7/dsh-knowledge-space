@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "知识空间",
+    "description": "把本地目录里的 Markdown、PDF、Word、Excel 索引成可检索的知识空间：左侧栏面板负责建空间、导入、重建索引，Agent 侧提供 knowledge_search 检索工具。内容全程留在本机。",
+    "detail": "docs/DETAIL.zh.md"
+  }
+}
