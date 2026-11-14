@@ -1,5 +1,8 @@
 # Knowledge spaces
 
+[![CI](https://github.com/Lurbing7/dsh-knowledge-space/actions/workflows/ci.yml/badge.svg)](https://github.com/Lurbing7/dsh-knowledge-space/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Turn **local folders** into searchable knowledge for DSH. Nothing is copied, rewritten, or uploaded: the plugin keeps a side index in SQLite, and you keep editing files in Obsidian, VS Code, or anything else. Re-index when you want the index to catch up.
 
 ## What it does

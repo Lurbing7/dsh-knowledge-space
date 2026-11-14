@@ -1,6 +1,20 @@
 # 路线图：从个人初版到可公开分发的插件
 
-状态：2026-11-14 起草。当前版本 0.1.0，仅在本机 `notes` 库验证过。
+状态：2026-11-14 起草，同日发布 0.1.0。**P0 已全部落地**（见文末「已交付」），P1–P3 待做。
+
+## 已交付（0.1.0）
+
+- 通用化：上传目录中性化（`_knowledge-space/uploads`）、`sensitivePaths` 可配置（默认 `private` / `.env*` / `*.pem` / `*.key` / `id_rsa*` / `*.kdbx`），不再硬编码个人库约定。
+- 双语：面板、错误、工具描述、插件元数据全中英；`pnpm check` 断言英文词典无中日韩字符、无缺失 key。
+- Config：`dataDir`、默认扩展名/排除目录/敏感规则/上传目录、`maxFileMB`、`maxPdfPages`、`maxDocChars`、`promptHint`；`@deepseek-ai/schemastery` 以 peer + dev 双声明加载，解析不到时降级为无 Config。
+- 安全上限：ZIP 条目/单条/总解压体积、PDF 页数、单文档字符数、NUL 二进制嗅探、UTF-8→GB18030 回退。
+- 跨平台目录选择器：Windows 枚举驱动器，POSIX 从 `/` 与 `$HOME` 起。
+- 索引 schema 版本：不兼容时丢弃重建，不做半吊子迁移。
+- 工程化：MIT LICENSE、双语 README、SECURITY、CONTRIBUTING、CHANGELOG、CI（ubuntu/windows/macos × Node 24）、30 个 node:test 用例、`npm pack` 文件清单校验。
+- 发布形态：纯 ESM 无构建，`dsh plugin add dsh-knowledge-space` 即可。
+
+P0 之后仍未做的核心项：watcher、取消/并发、embedding 混合检索、`metaLocation`/`indexLocation` 可配置、插件索引收录。
+
 
 ## 0. 判断：现在离"别人能用"差在哪
 
