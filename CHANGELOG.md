@@ -6,6 +6,10 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- Align the panel with the host's page language: 960px content column with clamp insets, 20px/500 page title, pill section tabs, hairline-divided sections, 36px controls with `--dsw-alias-border-l3`, 28px chips, host modal mask and elevation tokens.
+
 ## [0.1.0] - 2026-11-14
 
 ### Added
