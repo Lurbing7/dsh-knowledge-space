@@ -411,6 +411,68 @@ window.__ModuleLoader__.load({
       );
     }
 
+    /** Space switcher: a host-style menu, not the operating system's select popup. */
+    function SpacePicker({ spaces, value, onChange, t }) {
+      const [open, setOpen] = useState(false);
+      const rootRef = useRef(null);
+
+      useEffect(() => {
+        if (!open) return undefined;
+        const onPointer = (event) => {
+          if (!rootRef.current?.contains(event.target)) setOpen(false);
+        };
+        const onKey = (event) => {
+          if (event.key === 'Escape') setOpen(false);
+        };
+        document.addEventListener('mousedown', onPointer);
+        document.addEventListener('keydown', onKey);
+        return () => {
+          document.removeEventListener('mousedown', onPointer);
+          document.removeEventListener('keydown', onKey);
+        };
+      }, [open]);
+
+      const current = spaces.find((item) => item.id === value);
+      return h(
+        'div',
+        { className: 'ks-picker', ref: rootRef },
+        h(
+          'button',
+          {
+            type: 'button',
+            className: 'ks-btn ks-btn-outline ks-btn-sm ks-picker-trigger',
+            'aria-haspopup': 'listbox',
+            'aria-expanded': open ? 'true' : 'false',
+            onClick: () => setOpen((state) => !state),
+          },
+          h('span', { className: 'ks-picker-label' }, current?.name ?? '—'),
+          h('span', { className: 'ks-chevron', 'aria-hidden': 'true' }, '▾'),
+        ),
+        open &&
+          h(
+            'div',
+            { className: 'ks-menu', role: 'listbox' },
+            spaces.map((item) =>
+              h(
+                'button',
+                {
+                  key: item.id,
+                  type: 'button',
+                  role: 'option',
+                  'aria-selected': item.id === value ? 'true' : 'false',
+                  className: `ks-menu-item ${item.id === value ? 'is-active' : ''}`,
+                  onClick: () => {
+                    onChange(item.id);
+                    setOpen(false);
+                  },
+                },
+                `${item.name}${item.missing ? ` (${t('missing')})` : ''}`,
+              ),
+            ),
+          ),
+      );
+    }
+
     function Toggle({ checked, onChange, label, hint }) {
       return h(
         'div',
@@ -431,8 +493,7 @@ window.__ModuleLoader__.load({
       );
     }
 
-    function Progress({ job, t }) {
-      if (!job) return null;
+    function Progress({ job, t }) {      if (!job) return null;
       const total = Number(job.total) || 0;
       const done = Number(job.done) || 0;
       const pct = total > 0 ? Math.min(100, Math.round((done / total) * 100)) : job.running ? 6 : 100;
@@ -534,19 +595,7 @@ window.__ModuleLoader__.load({
               h(
                 'div',
                 { className: 'ks-heading-actions' },
-                spaces.length > 0 &&
-                  h(
-                    'select',
-                    {
-                      className: 'ks-select ks-select-sm',
-                      'aria-label': t('title'),
-                      value: space?.id ?? '',
-                      onChange: (event) => setSelectedId(event.target.value),
-                    },
-                    spaces.map((item) =>
-                      h('option', { key: item.id, value: item.id }, `${item.name}${item.missing ? ` (${t('missing')})` : ''}`),
-                    ),
-                  ),
+                spaces.length > 0 && h(SpacePicker, { spaces, value: space?.id ?? '', onChange: setSelectedId, t }),
                 h(Button, { variant: 'primary', onClick: () => setCreating(true) }, t('newSpace')),
               ),
             ),
@@ -1300,6 +1349,17 @@ window.__ModuleLoader__.load({
       .ks-empty p { max-width: 60ch; margin: 0; font-size: 14px; line-height: 1.6; }
       .ks-empty .ks-btn { margin-top: 4px; }
       .ks-inline { display: flex; align-items: center; gap: 10px; margin: -8px 0 16px; }
+
+      .ks-picker { position: relative; }
+      .ks-picker-trigger { gap: 8px; max-width: 220px; }
+      .ks-picker-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .ks-chevron { font-size: 10px; line-height: 1; color: var(--dsw-alias-label-tertiary); }
+      .ks-menu { position: absolute; z-index: 50; top: calc(100% + 6px); right: 0; min-width: 220px; max-height: 280px; overflow-y: auto; padding: 4px; border: 0.5px solid var(--dsw-alias-border-l1); border-radius: 12px; background: var(--dsw-alias-bg-overlay); box-shadow: var(--dsw-elevation-prominent, 0 16px 40px rgba(0, 0, 0, .24)); }
+      .ks-menu-item { display: block; width: 100%; padding: 6px 8px; border: 0; border-radius: 8px; background: transparent; color: inherit; font: inherit; font-size: 13px; line-height: 21px; text-align: left; white-space: nowrap; cursor: pointer; }
+      .ks-menu-item:hover, .ks-menu-item.is-active { background: var(--dsw-alias-interactive-bg-hover); }
+
+      .ks-btn:focus-visible, .ks-tab:focus-visible, .ks-row:focus-visible, .ks-menu-item:focus-visible,
+      .ks-diritem:focus-visible, .ks-switch:focus-visible { outline: 2px solid var(--dsw-alias-brand-primary); outline-offset: 2px; }
 
       .ks-modal-backdrop { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 24px; background: var(--dsw-alias-bg-mask-1, rgba(0, 0, 0, .4)); backdrop-filter: var(--dsw-mask-blur, blur(2px)); }
       .ks-modal { display: flex; flex-direction: column; gap: 10px; width: min(520px, 100%); padding: 20px 22px; border-radius: var(--dsw-radius-panel, 16px); background: var(--dsw-alias-bg-layer-2); box-shadow: var(--dsw-elevation-prominent, 0 24px 64px rgba(0, 0, 0, .3)); }
